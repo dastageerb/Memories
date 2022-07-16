@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "502964358554",
+    "project_id": "memories-b12e0",
+    "storage_bucket": "memories-b12e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502964358554:android:95612e0377443c4c2d3e23",
+        "android_client_info": {
+          "package_name": "com.example.memories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502964358554-hncoqd7ics6l9kif5uqstbggv6k8lg73.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.memories",
+            "certificate_hash": "a5d66d2cf8afa2d433024cfe4e293a956ee74d38"
+          }
+        },
+        {
+          "client_id": "502964358554-2qgvj6uemngjgsj1ore09u8d2e7ltlrl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsUlA5PctaSRtXF3P8LSCLOuRQ9nXflsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502964358554-2qgvj6uemngjgsj1ore09u8d2e7ltlrl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

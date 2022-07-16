@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.memory.AddMemoryFragment"
+    android:background="@color/white"
+    >
+
+
+    <ImageView
+        android:id="@+id/fragmentMemoryImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_baseline_insert_photo_24" />
+
+
+    <EditText
+        android:id="@+id/fragmentMemoryDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_below="@id/fragmentMemoryImageView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/description"
+        android:inputType="textMultiLine|textLongMessage"
+        android:gravity="top|start"
+        android:paddingTop="4dp"
+        android:textSize="16sp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentMemoryButtonAddMemory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/big_button_bg"
+        android:layout_below="@id/fragmentMemoryDescriptionTextView"
+        android:layout_margin="24dp"
+        android:textColor="@color/white"
+        android:text="Add Memory"
+        android:textAllCaps="false"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tint="@color/design_default_color_primary"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/fragmentAddMemoryProgressBar"
+        android:layout_below="@id/fragmentMemoryButtonAddMemory"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

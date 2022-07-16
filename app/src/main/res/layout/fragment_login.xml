@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.LogInFragment"
+    android:background="@color/white"
+    >
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/fragmentLoginEditTextNumber"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/edit_text_bg"
+        android:hint="Phone number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:padding="16dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/fragmentLoginButtonLogin"
+        android:background="@drawable/big_button_bg"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_below="@id/fragmentLoginEditTextNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        />
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentLoginButtonGoToRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:background="@drawable/big_button_bg"
+        android:textColor="@color/white"
+        android:layout_margin="36dp"
+        android:layout_below="@id/fragmentLoginButtonLogin"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragmentLoginProgressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/fragmentLoginButtonGoToRegister"
+        />
+
+
+</RelativeLayout>
