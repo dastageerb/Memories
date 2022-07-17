@@ -38,7 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
         super.onViewCreated(view, savedInstanceState)
 
 
-       initView()
+       initViews()
 
     } // onViewCreated closed
 
@@ -48,7 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
      //   memoryViewModel.getAllMemories()
     } // onResume closed
 
-    private fun initView()
+    override fun initViews()
     {
 
         setupRecyclerView(binding.fragmentHomeRecyclerView)

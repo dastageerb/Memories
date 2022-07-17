@@ -56,7 +56,7 @@ class MemoryRepoImpl(
             return ResponseMessage(Response.FAILED,"unauthorized user")
 
         val id = memoryCollection.document().id
-        val link =  storageRepo.uploadImage(bitmap,Constants.MEMORY_COLLECTION)
+        val link =  storageRepo.uploadImage(bitmap,Constants.MEMORY_STORAGE)
         val memory = Memory(id,description,link, timestamp = Timestamp.now(), firebaseAuth.currentUser!!.phoneNumber)
 
          val task = memoryCollection.document(id).set(memory)

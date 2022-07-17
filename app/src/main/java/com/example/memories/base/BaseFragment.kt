@@ -24,6 +24,7 @@ abstract class BaseFragment<VB:ViewBinding> : Fragment()
 
     abstract fun createView(inflater: LayoutInflater, container: ViewGroup?, b: Boolean): VB
 
+    abstract fun initViews()
 
     override fun onDestroyView()
     {

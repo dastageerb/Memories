@@ -30,13 +30,10 @@ class MainActivity : AppCompatActivity()
         navController = navHostFragment.navController
 
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.homeFragment , R.id.logInFragment , R.id.registerFragment , R.id.verifyOtpFragment
-            ))
 
 
-        setupActionBarWithNavController(navController,appBarConfiguration)
+
+        //setupActionBarWithNavController(navController,appBarConfiguration)
 
 
       //  binding..setupWithNavController(navController)

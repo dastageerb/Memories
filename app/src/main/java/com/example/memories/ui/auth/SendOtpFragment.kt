@@ -8,25 +8,25 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.memories.R
 import com.example.memories.base.BaseFragment
-import com.example.memories.databinding.FragmentLoginBinding
-import com.example.memories.ui.auth.viewmodel.AuthViewModel
+import com.example.memories.databinding.FragmentSendOtpBinding
+import com.example.memories.utils.extensionFunctions.ExtensionFunctions.hide
 import com.example.memories.utils.extensionFunctions.ExtensionFunctions.show
 import com.example.memories.utils.stateManagement.NetworkResponse
 import com.qrcodescanner.barcodescanner.qrgenerator.barcodegenerator.utils.extensionFunctions.ContextExtension.showToast
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class LogInFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
+class SendOtpFragment : BaseFragment<FragmentSendOtpBinding>(), View.OnClickListener
 
 {
 
 
-    private  val authViewModel: AuthViewModel by viewModel()
+    private  val authViewModel: AuthViewModel by sharedViewModel()
 
 
-    override fun createView(inflater: LayoutInflater, container: ViewGroup?, b: Boolean): FragmentLoginBinding
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?, b: Boolean): FragmentSendOtpBinding
     {
-        return FragmentLoginBinding.inflate(inflater,container,false)
+        return FragmentSendOtpBinding.inflate(inflater,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
@@ -39,14 +39,13 @@ class LogInFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
     } // onViewCreated closed
 
 
-    private fun initViews()
+     override fun initViews()
     {
 
         if (authViewModel.currentUser()!=null)
             findNavController().setGraph(R.navigation.base_nav)
 
-        binding.fragmentLoginButtonLogin.setOnClickListener(this)
-        binding.fragmentLoginButtonGoToRegister.setOnClickListener(this)
+        binding.fragmentSendOtpButtonSend.setOnClickListener(this)
         subscribeToOtpCallbackObserver()
 
     } // initViews closed
@@ -60,11 +59,16 @@ class LogInFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
             when(it)
             {
                 is NetworkResponse.Loading -> binding.fragmentLoginProgressBar.show()
-                is NetworkResponse.Error -> requireContext().showToast(it.msg.toString())
+                is NetworkResponse.Error ->
+                {
+                    binding.fragmentLoginProgressBar.hide()
+                    requireContext().showToast(it.msg.toString())
+                }
                 is NetworkResponse.Success ->
                 {
+                    binding.fragmentLoginProgressBar.hide()
                     authViewModel.verificationId = it.data?.second
-                    findNavController().navigate(R.id.action_logInFragment_to_verifyOtpFragment)
+                    findNavController().navigate(R.id.action_sendOtpFragment_to_verifyOtpFragment)
                 }
             } // when closed
 
@@ -77,10 +81,7 @@ class LogInFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
     {
         when(view.id)
         {
-            R.id.fragmentLoginButtonLogin -> login(binding.fragmentLoginButtonLogin.text.toString())
-            R.id.fragmentLoginButtonGoToRegister -> findNavController()
-                .navigate(R.id.action_logInFragment_to_registerFragment)
-
+            R.id.fragmentSendOtpButtonSend -> login(binding.fragmentSendOtpEditTextNumber.text.toString())
         } // when closed
     }
 

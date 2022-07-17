@@ -52,7 +52,7 @@ class AddMemoryFragment : BaseFragment<FragmentAddMemoryBinding>(), View.OnClick
 
     } // onViewCreated closed
 
-    private fun initViews()
+    override fun initViews()
     {
 
         binding.fragmentMemoryButtonAddMemory.setOnClickListener(this)

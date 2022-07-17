@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.profile.ProfileFragment"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fragmentProfileCardView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:cardCornerRadius="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        app:cardElevation="2dp"
+        >
+
+        <ImageView
+            android:id="@+id/fragmentProfileImageViewProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_insert_photo_24"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_image_view"
+            android:padding="16dp"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/fragmentProfileImageViewEditImage"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="110dp"
+        android:layout_toEndOf="@id/fragmentProfileCardView"
+        android:elevation="2dp"
+        android:src="@drawable/ic_baseline_edit_24" />
+
+    <EditText
+        android:id="@+id/fragmentProfileEditTextName"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Name"
+        android:textColorHint="@color/black"
+        android:layout_below="@id/fragmentProfileCardView"
+        android:layout_marginTop="24dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/fragmentProfileEditTextName"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/big_button_bg"
+        android:layout_marginTop="50dp"
+        android:text="Next"
+        android:textColor="@color/white"
+        android:id="@+id/fragmentProfileTextColorWhite"
+        />
+
+</RelativeLayout>
