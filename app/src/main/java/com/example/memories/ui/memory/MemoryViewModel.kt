@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.memories.domain.ContactsRepo
 import com.example.memories.domain.MemoryRepo
 import com.example.memories.model.Memory
 import com.example.memories.model.Response
@@ -20,7 +21,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class MemoryViewModel(private val memoryRepo: MemoryRepo):ViewModel()
+class MemoryViewModel(private val memoryRepo: MemoryRepo,private val contactsRepo: ContactsRepo):ViewModel()
 {
 
 
@@ -121,6 +122,12 @@ class MemoryViewModel(private val memoryRepo: MemoryRepo):ViewModel()
 
         return Pair(true,"")
     }
+
+
+    fun getContacts() = contactsRepo.getContactNumbers()
+
+
+
 
 
 }

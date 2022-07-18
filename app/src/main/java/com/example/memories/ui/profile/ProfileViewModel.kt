@@ -12,10 +12,10 @@ import com.example.memories.domain.ProfileRepo
 import com.example.memories.model.Memory
 import com.example.memories.model.Response
 import com.example.memories.model.ResponseMessage
+import com.example.memories.model.User
 import com.example.memories.utils.Constants.TAG
 import com.example.memories.utils.stateManagement.NetworkResponse
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.auth.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,10 +31,11 @@ class ProfileViewModel(private val profileRepo: ProfileRepo):ViewModel()
    val getUser:LiveData<NetworkResponse<User?>> = _getUser
 
 
-    fun getProfile() = viewModelScope.launch(Dispatchers.IO)
+    fun getProfile() = viewModelScope.launch(Dispatchers.Main)
     {
         _getUser.value = NetworkResponse.Loading()
         try
+
         {
             val response = profileRepo.getProfile()
             _getUser.value = NetworkResponse.Success(response)
@@ -45,33 +46,88 @@ class ProfileViewModel(private val profileRepo: ProfileRepo):ViewModel()
         }
     } // getUser closed
 
-    private val _userNameResponse:MutableSharedFlow<NetworkResponse<ResponseMessage>> = MutableSharedFlow(0)
-    val userNameResponse:SharedFlow<NetworkResponse<ResponseMessage>> = _userNameResponse
 
 
-    fun setUserName(name:String) = viewModelScope.launch(Dispatchers.IO)
+    private val _uploadUserResponse:MutableSharedFlow<NetworkResponse<ResponseMessage>> = MutableSharedFlow(0)
+    val uploadUserResponse:SharedFlow<NetworkResponse<ResponseMessage>> = _uploadUserResponse
+
+
+    fun validateAndUploadUser(name: String,bitmap: Bitmap?,user: User?)
     {
-        _userNameResponse.emit(NetworkResponse.Loading())
+
+        if (user==null)
+            uploadUser(name,bitmap)
+
+        if (user!=null)
+        {
+            user?.name = name
+
+            if (bitmap==null)
+            {
+                uploadUser(user!!)
+            }else
+            {
+                uploadUser(user!!, bitmap!!)
+            }
+        } // if closed
+
+
+    }
+
+    fun uploadUser(name:String, bitmap: Bitmap?) = viewModelScope.launch(Dispatchers.IO)
+    {
+        _uploadUserResponse.emit(NetworkResponse.Loading())
         try
         {
-            val response = profileRepo.setUserName(name)
+            val response = profileRepo.uploadUser(name,bitmap)
             when(response.response)
             {
-                Response.SUCCESS -> _userNameResponse.emit(NetworkResponse.Success(response))
-                Response.FAILED -> _userNameResponse.emit(NetworkResponse.Error(response.message))
+                Response.SUCCESS -> _uploadUserResponse.emit(NetworkResponse.Success(response))
+                Response.FAILED -> _uploadUserResponse.emit(NetworkResponse.Error(response.message))
             }
         }catch (e:Exception)
         {
-            _userNameResponse.emit(NetworkResponse.Error(e.message))
+            _uploadUserResponse.emit(NetworkResponse.Error(e.message))
         }
+    } // closed
 
-    } // setUserName closed
 
 
-    fun setUserProfile(bitmap: Bitmap) = viewModelScope.launch(Dispatchers.IO)
+    fun uploadUser(user: User) = viewModelScope.launch(Dispatchers.IO)
     {
-        profileRepo.setUserImage(bitmap)
-    } // setUserName closed
+        _uploadUserResponse.emit(NetworkResponse.Loading())
+        try
+        {
+            val response = profileRepo.uploadUser(user)
+            when(response.response)
+            {
+                Response.SUCCESS -> _uploadUserResponse.emit(NetworkResponse.Success(response))
+                Response.FAILED -> _uploadUserResponse.emit(NetworkResponse.Error(response.message))
+            }
+        }catch (e:Exception)
+        {
+            _uploadUserResponse.emit(NetworkResponse.Error(e.message))
+        }
+    } // closed
 
 
-}
+    fun uploadUser(user:User, bitmap: Bitmap) = viewModelScope.launch(Dispatchers.IO)
+    {
+        _uploadUserResponse.emit(NetworkResponse.Loading())
+        try
+        {
+            val response = profileRepo.uploadUser(user,bitmap)
+            when(response.response)
+            {
+                Response.SUCCESS -> _uploadUserResponse.emit(NetworkResponse.Success(response))
+                Response.FAILED -> _uploadUserResponse.emit(NetworkResponse.Error(response.message))
+            }
+        }catch (e:Exception)
+        {
+            _uploadUserResponse.emit(NetworkResponse.Error(e.message))
+        }
+    } // closed
+
+
+
+} // ProfileViewModel closed

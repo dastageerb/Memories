@@ -22,19 +22,32 @@ class ProfileRepoImpl(
 
     private val userCollection = fireStore.collection(Constants.USER_COLLECTION)
 
-    override suspend fun uploadUser(name: String, bitmap: Bitmap): ResponseMessage
+    override suspend fun uploadUser(name: String, bitmap: Bitmap?): ResponseMessage
     {
         if (firebaseAuth.currentUser==null)
             return ResponseMessage(Response.FAILED,"unauthorized user")
 
         val id = userCollection.document().id
-        val link =  storageRepo.uploadImage(bitmap,Constants.PROFILE_STORAGE)
+
+        val link =  if (bitmap!=null)
+            storageRepo.uploadImage(bitmap,Constants.PROFILE_STORAGE)
+        else
+            ""
 
         val user = User(id,name,firebaseAuth.currentUser!!.phoneNumber,link)
 
         return uploadUser(user)
 
     }
+
+
+    override suspend fun uploadUser(user: User, bitmap: Bitmap): ResponseMessage
+    {
+        val link = storageRepo.uploadImage(bitmap,Constants.PROFILE_STORAGE)
+        user.profileImage = link
+        return uploadUser(user)
+    }
+
 
     override suspend fun uploadUser(user: User):ResponseMessage
     {
@@ -47,6 +60,9 @@ class ProfileRepoImpl(
             ResponseMessage(Response.FAILED,""+task.exception?.message.toString())
 
     } // uploadUser closed
+
+
+
 
     override suspend fun getProfile(): User?
     {

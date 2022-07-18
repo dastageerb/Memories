@@ -49,6 +49,8 @@
         android:textColorHint="@color/black"
         android:layout_below="@id/fragmentProfileCardView"
         android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -60,7 +62,16 @@
         android:layout_marginTop="50dp"
         android:text="Next"
         android:textColor="@color/white"
-        android:id="@+id/fragmentProfileTextColorWhite"
+        android:id="@+id/fragmentProfileButtonNext"
+        />
+
+    <ProgressBar
+        android:id="@+id/fragmentProfileProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/fragmentProfileButtonNext"
+        android:layout_marginTop="36dp"
         />
 
 </RelativeLayout>

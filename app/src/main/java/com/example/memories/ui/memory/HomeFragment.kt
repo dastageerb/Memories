@@ -42,11 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
 
     } // onViewCreated closed
 
-    override fun onResume()
-    {
-        super.onResume()
-     //   memoryViewModel.getAllMemories()
-    } // onResume closed
+
 
     override fun initViews()
     {
@@ -55,6 +51,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
         subscribeToMemories()
         memoryViewModel.getAllMemories()
         binding.fragmentHomeFloatingActionButton.setOnClickListener(this)
+
+        try
+        {
+            Log.d(TAG, "initViews: "+memoryViewModel.getContacts())
+        }
+        catch (e:Exception)
+        {
+            Log.d(TAG, "initViews: "+e.message)
+        }
 
     }
 

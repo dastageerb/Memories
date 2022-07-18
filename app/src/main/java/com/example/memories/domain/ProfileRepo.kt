@@ -7,9 +7,11 @@ import com.example.memories.model.User
 interface ProfileRepo
 {
 
-    suspend fun uploadUser(name:String,bitmap: Bitmap):ResponseMessage
+    suspend fun uploadUser(name:String,bitmap: Bitmap?):ResponseMessage
 
     suspend fun uploadUser(user: User):ResponseMessage
+
+    suspend fun uploadUser(user: User,bitmap: Bitmap):ResponseMessage
 
     suspend fun getProfile():User?
 
