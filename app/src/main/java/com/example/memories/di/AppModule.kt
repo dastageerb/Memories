@@ -3,7 +3,6 @@ package com.example.memories.di
 import com.example.memories.data.remote.*
 import com.example.memories.data.repository.StorageRepo
 import com.example.memories.domain.AuthRepo
-import com.example.memories.domain.ContactsRepo
 import com.example.memories.domain.MemoryRepo
 import com.example.memories.domain.ProfileRepo
 import com.example.memories.ui.auth.AuthViewModel
@@ -26,7 +25,7 @@ val repoModule = module{
         MemoryRepoImpl(get(),get(),get())
     }
 
-    single { MemoryViewModel(get(),get()) }
+    single { MemoryViewModel(get()) }
 
 
 
@@ -39,8 +38,6 @@ val repoModule = module{
 
     single { ProfileViewModel(get()) }
 
-
-    single<ContactsRepo>{ ContactsRepoImpl(get()) }
 
 
 }

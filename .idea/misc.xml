@@ -4,19 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/big_button_bg.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/black_stroke.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable/circle_image_view.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/edit_text_bg.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_reload_24.xml" value="0.1075" />
+        <entry key="app/src/main/res/drawable/toolbar_bottom.xml" value="0.1075" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_add_memory.xml" value="0.18854166666666666" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15092592592592594" />
+        <entry key="app/src/main/res/layout/fragment_add_memory.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22544951590594745" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_memory.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/fragment_send_otp.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_verify_otp.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/fragment_view_memory.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/layout_memory_item.xml" value="0.1875" />
       </map>
     </option>

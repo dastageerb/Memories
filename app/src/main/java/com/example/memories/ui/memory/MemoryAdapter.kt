@@ -24,7 +24,7 @@ class MemoryAdapter(private val onClicked: (Memory) -> Unit) :
         fun bind(item: Memory?, position: Int)
         {
 
-            binding.layoutMemoryItemTextViewDescription.text = item?.description
+            //binding.layoutMemoryItemTextViewDescription.text = item?.description
 
 
             if (item?.imageUrl is String)

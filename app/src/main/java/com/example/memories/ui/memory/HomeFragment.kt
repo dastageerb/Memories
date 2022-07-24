@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.memories.R
@@ -19,13 +20,14 @@ import com.example.memories.utils.extensionFunctions.ExtensionFunctions.hide
 import com.example.memories.utils.extensionFunctions.ExtensionFunctions.show
 import com.example.memories.utils.stateManagement.NetworkResponse
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
 { // home fragment closed
 
-    private val memoryViewModel:MemoryViewModel by viewModel()
+    private val memoryViewModel:MemoryViewModel by sharedViewModel()
     var adapter:MemoryAdapter?=null
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, b: Boolean): FragmentHomeBinding
@@ -46,21 +48,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
 
     override fun initViews()
     {
-
+        memoryViewModel.memory = null
         setupRecyclerView(binding.fragmentHomeRecyclerView)
         subscribeToMemories()
         memoryViewModel.getAllMemories()
         binding.fragmentHomeFloatingActionButton.setOnClickListener(this)
-
-        try
-        {
-            Log.d(TAG, "initViews: "+memoryViewModel.getContacts())
-        }
-        catch (e:Exception)
-        {
-            Log.d(TAG, "initViews: "+e.message)
-        }
-
+        binding.fragmentHomeReload.setOnClickListener(this)
     }
 
     private fun subscribeToMemories()
@@ -93,12 +86,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
     {
         adapter = MemoryAdapter()
         {
-
+            memoryViewModel.memory = it
+            findNavController().navigate(R.id.action_homeFragment_to_viewMemoryFragment)
         }
 
 
-
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(),3)
         recyclerView.adapter = adapter
 
 
@@ -109,6 +102,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
 
 
 
+
+
     override fun onClick(view: View?)
     {
         when(view?.id)
@@ -116,6 +111,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
             R.id.fragmentHomeFloatingActionButton ->
             {
                 findNavController().navigate(R.id.action_homeFragment_to_addMemoryFragment)
+            }
+            R.id.fragmentHomeReload ->
+            {
+                memoryViewModel.getAllMemories()
             }
         } // when closed
     } // onClick closed

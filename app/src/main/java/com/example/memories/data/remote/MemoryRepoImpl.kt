@@ -32,8 +32,14 @@ class MemoryRepoImpl(
 
     override suspend fun getAllMemories(): List<Memory>
     {
+        if (firebaseAuth.currentUser==null)
+            return emptyList()
+
+
+        Log.d(TAG, "getAllMemories: "+firebaseAuth.currentUser!!.phoneNumber)
         val list = mutableListOf<Memory>()
         val task =  memoryCollection
+            .whereEqualTo("userPhoneNumber",firebaseAuth.currentUser!!.phoneNumber)
             .orderBy("timestamp", Query.Direction.DESCENDING)
             .get()
         task.await()
@@ -59,7 +65,7 @@ class MemoryRepoImpl(
         val link =  storageRepo.uploadImage(bitmap,Constants.MEMORY_STORAGE)
         val memory = Memory(id,description,link, timestamp = Timestamp.now(), firebaseAuth.currentUser!!.phoneNumber)
 
-         val task = memoryCollection.document(id).set(memory)
+         val task = memoryCollection.add(memory)
         task.await()
 
         return if (task.isSuccessful)

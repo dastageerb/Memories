@@ -9,29 +9,65 @@
     >
 
 
-    <ImageView
-        android:id="@+id/fragmentMemoryImageView"
+    <RelativeLayout
+        android:id="@+id/fragmentAddMemoryToolbarLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/ic_baseline_insert_photo_24" />
+        android:layout_height="60dp"
+        android:background="@drawable/toolbar_bottom"
+        android:elevation="4dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Memories"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:id="@+id/fragmentAddMemoryImageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="20dp"
+        android:padding="2dp"
+        android:background="@drawable/black_stroke"
+        android:layout_below="@id/fragmentAddMemoryToolbarLayout"
+    >
+
+        <ImageView
+            android:id="@+id/fragmentMemoryImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:src="@drawable/ic_baseline_insert_photo_24" />
+
+    </RelativeLayout>
 
 
     <EditText
         android:id="@+id/fragmentMemoryDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:layout_below="@id/fragmentMemoryImageView"
+        android:layout_below="@id/fragmentAddMemoryImageLayout"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/edit_text_bg"
+        android:gravity="top|start"
         android:hint="@string/description"
         android:inputType="textMultiLine|textLongMessage"
-        android:gravity="top|start"
+        android:padding="16dp"
         android:paddingTop="4dp"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/fragmentMemoryButtonAddMemory"

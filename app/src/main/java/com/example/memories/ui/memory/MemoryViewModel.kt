@@ -7,21 +7,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.memories.domain.ContactsRepo
 import com.example.memories.domain.MemoryRepo
 import com.example.memories.model.Memory
 import com.example.memories.model.Response
 import com.example.memories.model.ResponseMessage
-import com.example.memories.utils.Constants.TAG
 import com.example.memories.utils.stateManagement.NetworkResponse
-import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
-class MemoryViewModel(private val memoryRepo: MemoryRepo,private val contactsRepo: ContactsRepo):ViewModel()
+class MemoryViewModel(private val memoryRepo: MemoryRepo):ViewModel()
 {
 
 
@@ -89,24 +85,6 @@ class MemoryViewModel(private val memoryRepo: MemoryRepo,private val contactsRep
     }
 
 
-//
-//    private suspend fun doTask(task: Task<Void>, message: String)
-//    {
-//        _memoryResponse.emit(NetworkResponse.Loading())
-//        try
-//        {
-//            task.await()
-//           if (task.isSuccessful)
-//           {
-//                _memoryResponse.emit(NetworkResponse.Success(Pair(true, "$message successfully")))
-//           }
-//        }catch (e:Exception)
-//        {
-//            _memoryResponse.emit(NetworkResponse.Error(e.message.toString()))
-//        }
-//    } // doTask closed
-//
-
 
 
 
@@ -124,10 +102,10 @@ class MemoryViewModel(private val memoryRepo: MemoryRepo,private val contactsRep
     }
 
 
-    fun getContacts() = contactsRepo.getContactNumbers()
 
+    /// shared Entity
 
-
+    var memory:Memory?=null
 
 
 }

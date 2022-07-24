@@ -54,16 +54,15 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentProfileButtonNext"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_below="@id/fragmentProfileEditTextName"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/big_button_bg"
         android:layout_marginTop="50dp"
+        android:background="@drawable/big_button_bg"
         android:text="Next"
-        android:textColor="@color/white"
-        android:id="@+id/fragmentProfileButtonNext"
-        />
+        android:textColor="@color/white" />
 
     <ProgressBar
         android:id="@+id/fragmentProfileProgressBar"
