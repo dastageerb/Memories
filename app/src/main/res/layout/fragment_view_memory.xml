@@ -71,14 +71,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/fragmentViewMemoryTextViewTimeStamp"
-            android:layout_margin="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="Memory Text"
             android:textColor="@color/black" />
 
+
+        <ProgressBar
+            android:id="@+id/fragmentViewMemoryProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/fragmentViewMemoryTextViewDescription"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 

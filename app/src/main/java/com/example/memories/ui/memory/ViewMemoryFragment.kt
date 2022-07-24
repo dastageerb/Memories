@@ -1,15 +1,20 @@
 package com.example.memories.ui.memory
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.memories.R
 import com.example.memories.base.BaseFragment
 import com.example.memories.databinding.FragmentViewMemoryBinding
+import com.example.memories.utils.extensionFunctions.ExtensionFunctions.hide
+import com.example.memories.utils.extensionFunctions.ExtensionFunctions.show
 import com.example.memories.utils.stateManagement.NetworkResponse
+import com.qrcodescanner.barcodescanner.qrgenerator.barcodegenerator.utils.extensionFunctions.ContextExtension.showToast
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -59,7 +64,20 @@ class ViewMemoryFragment : BaseFragment<FragmentViewMemoryBinding>(),View.OnClic
             {
                 is NetworkResponse.Loading->
                 {
+                    binding.fragmentViewMemoryProgressBar.show()
+                }
 
+                is NetworkResponse.Error ->
+                {
+                    binding.fragmentViewMemoryProgressBar.hide()
+                    requireContext().showToast(it.msg.toString())
+                }
+
+                is NetworkResponse.Success->
+                {
+                    binding.fragmentViewMemoryProgressBar.hide()
+                    requireContext().showToast(it.data?.message.toString())
+                    findNavController().navigate(R.id.action_viewMemoryFragment_to_homeFragment)
                 }
             } // when closed
         } /// subscribeTo MemoryResponse closed

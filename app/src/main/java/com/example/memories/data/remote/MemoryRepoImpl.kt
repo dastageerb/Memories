@@ -13,10 +13,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
@@ -35,8 +32,6 @@ class MemoryRepoImpl(
         if (firebaseAuth.currentUser==null)
             return emptyList()
 
-
-        Log.d(TAG, "getAllMemories: "+firebaseAuth.currentUser!!.phoneNumber)
         val list = mutableListOf<Memory>()
         val task =  memoryCollection
             .whereEqualTo("userPhoneNumber",firebaseAuth.currentUser!!.phoneNumber)
@@ -51,9 +46,8 @@ class MemoryRepoImpl(
             }
             list
         }else
-        {
             emptyList()
-        }
+
     } // getAllMemories closed
 
     override suspend fun addMemory(description:String,bitmap: Bitmap): ResponseMessage
@@ -65,33 +59,46 @@ class MemoryRepoImpl(
         val link =  storageRepo.uploadImage(bitmap,Constants.MEMORY_STORAGE)
         val memory = Memory(id,description,link, timestamp = Timestamp.now(), firebaseAuth.currentUser!!.phoneNumber)
 
-         val task = memoryCollection.add(memory)
+         val task = memoryCollection.document(id).set(memory)
         task.await()
 
-        return if (task.isSuccessful)
-            ResponseMessage(Response.SUCCESS,"Added Successfully")
-        else
-            ResponseMessage(Response.FAILED,""+task.exception?.message.toString())
+        return taskResult(task,"Added")
 
     } // addMemory closed
 
 
     override suspend fun deleteMemory(id: String): ResponseMessage
     {
-
-        return ResponseMessage(Response.SUCCESS,"")
-        // return memoryCollection.document(id).delete()
+        val task = memoryCollection.document(id).delete()
+        task.await()
+        return taskResult(task,"Deleted")
     } // deleteMemory
+
+
 
 
     override suspend fun updateMemory(memory: Memory): ResponseMessage
     {
-        return ResponseMessage(Response.SUCCESS,"")
-       // return memoryCollection.document(memory.memoryId.toString()).set(memory)
+        if (memory.memoryId ==null)
+            return ResponseMessage(Response.FAILED,"update failed")
+        val task = memoryCollection.document(memory.memoryId!!).set(memory)
+        task.await()
+
+        return taskResult(task,"Updated")
     } // updateMemory
 
 
-//
+
+    private fun <T> taskResult(task: Task<T>, message: String): ResponseMessage
+    {
+        return if (task.isSuccessful)
+            ResponseMessage(Response.SUCCESS,"$message Successfully")
+        else
+            ResponseMessage(Response.FAILED,""+task.exception?.message.toString())
+    }
+
+
+
 //    override suspend fun getMemoryById(id: String): Memory
 //    {
 //

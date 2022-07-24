@@ -48,6 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
 
     override fun initViews()
     {
+        Log.d(TAG, "initViews: ")
         memoryViewModel.memory = null
         setupRecyclerView(binding.fragmentHomeRecyclerView)
         subscribeToMemories()
@@ -56,6 +57,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() , View.OnClickListener
         binding.fragmentHomeReload.setOnClickListener(this)
     }
 
+    override fun onResume()
+    {
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+    
     private fun subscribeToMemories()
     {
         memoryViewModel.allMemoriesResponse.observe(viewLifecycleOwner)

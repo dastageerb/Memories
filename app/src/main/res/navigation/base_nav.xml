@@ -37,7 +37,14 @@
         android:id="@+id/viewMemoryFragment"
         android:name="com.example.memories.ui.memory.ViewMemoryFragment"
         android:label="fragment_view_memory"
-        tools:layout="@layout/fragment_view_memory" />
+        tools:layout="@layout/fragment_view_memory" >
+        <action
+            android:id="@+id/action_viewMemoryFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/base_nav"
+            />
+    </fragment>
 
 
 </navigation>

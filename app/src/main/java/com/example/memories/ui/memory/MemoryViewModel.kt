@@ -75,13 +75,25 @@ class MemoryViewModel(private val memoryRepo: MemoryRepo):ViewModel()
 
     fun updateMemory(memory: Memory) = viewModelScope.launch(Dispatchers.IO)
     {
-       // doTask(memoryRepo.updateMemory(memory),"updated")
+
     }
 
 
     fun deleteMemory(id: String) = viewModelScope.launch(Dispatchers.IO)
     {
-       // doTask(memoryRepo.deleteMemory(id),"deleted")
+        _memoryResponse.emit(NetworkResponse.Loading())
+        try
+        {
+            val result = memoryRepo.deleteMemory(id)
+            when(result.response)
+            {
+                Response.SUCCESS -> _memoryResponse.emit(NetworkResponse.Success(result))
+                else -> _memoryResponse.emit(NetworkResponse.Error(result.message))
+            }
+        }catch (e:Exception)
+        {
+            _memoryResponse.emit(NetworkResponse.Error(e.message.toString()))
+        }
     }
 
 
